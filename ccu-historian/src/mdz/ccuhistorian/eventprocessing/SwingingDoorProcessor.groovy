@@ -29,6 +29,7 @@ import mdz.hc.ProcessValue
 class SwingingDoorProcessor extends BasicProducer<Event> implements Processor<Event, Event> {
 	
 	double deviation
+	private static final long SWD_MAX_WRITE_INTERVAL = 4 * 60 * 60 * 1000	// 4 Stunden
 	
 	private static class Slopes {
 		double upper, lower, direct
@@ -74,6 +75,15 @@ class SwingingDoorProcessor extends BasicProducer<Event> implements Processor<Ev
 			Slopes slopesTmp=calculateSlopes(first, e)
 			if (slopesTmp.direct <= slopes.upper && slopesTmp.direct >= slopes.lower) {
 				// Punkt ist innerhalb der Swinging Door, alten Punkt verwerfen
+				
+				// Timeout prüfen
+				if (e.pv.timestamp.time - first.pv.timestamp.time > SWD_MAX_WRITE_INTERVAL) {
+					produce e
+					first = e
+					last = null
+					slopes = null
+					return
+				}
 
 				// Swinging Door weiter schließen
 				if (slopesTmp.upper < slopes.upper) {
@@ -98,7 +108,15 @@ class SwingingDoorProcessor extends BasicProducer<Event> implements Processor<Ev
 			}
 		}
 		else {
-			// second event, calculate initial slopes
+			// second event
+			// Timeout prüfen
+			if (e.pv.timestamp.time - first.pv.timestamp.time > SWD_MAX_WRITE_INTERVAL) {
+				produce e
+				first = e
+				return
+			} 
+			
+			// calculate initial slopes
 			last=e
 			slopes=calculateSlopes(first, e)
 		}
