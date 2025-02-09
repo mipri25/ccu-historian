@@ -164,6 +164,6 @@ class ExtendedStorage implements Storage {
 	}
 	
 	private fireOnRequestFlush(DataPointIdentifier id) {
-		onRequestFlushListener.each { Closure cl -> cl(id) }
+		// onRequestFlushListener.each { Closure cl -> cl(id) }
 	}
 }
