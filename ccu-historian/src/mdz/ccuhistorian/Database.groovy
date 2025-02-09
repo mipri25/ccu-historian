@@ -46,7 +46,7 @@ public class Database implements Storage {
 
 	private Server webServer, tcpServer, pgServer
 	private Sql db
-	private final static long TIMESERIES_COPY_INTERVAL=30l*24*60*60*1000 // 1 month
+	private final static long TIMESERIES_COPY_INTERVAL=30*24*60*60*1000 // 1 month
 	private String backupLast
 	private ScheduledFuture backupFuture
 
