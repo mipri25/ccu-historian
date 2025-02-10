@@ -77,7 +77,7 @@ class SwingingDoorProcessor extends BasicProducer<Event> implements Processor<Ev
 				// Punkt ist innerhalb der Swinging Door, alten Punkt verwerfen
 				
 				// Timeout prüfen
-				if (e.pv.timestamp.time - first.pv.timestamp.time > SWD_MAX_WRITE_INTERVAL) {
+				if (e.pv.timestamp.time - first.pv.timestamp.time >= SWD_MAX_WRITE_INTERVAL) {
 					produce e
 					first = e
 					last = null
@@ -110,7 +110,7 @@ class SwingingDoorProcessor extends BasicProducer<Event> implements Processor<Ev
 		else {
 			// second event
 			// Timeout prüfen
-			if (e.pv.timestamp.time - first.pv.timestamp.time > SWD_MAX_WRITE_INTERVAL) {
+			if (e.pv.timestamp.time - first.pv.timestamp.time >= SWD_MAX_WRITE_INTERVAL) {
 				produce e
 				first = e
 				return
