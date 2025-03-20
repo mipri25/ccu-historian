@@ -184,7 +184,7 @@ public class PageRenderer {
 							div(class:'form-group') {
 								label class:'col-md-4 control-label', for:'input_password', 'Passwort:'
 								div(class:'col-md-8') {
-									input class:'form-control', type:'password', id:'input_password', name:'login_password', placeholder:'Passwort'
+									input class:'form-control', type:'password', id:'input_password', name:'login_password', placeholder:'Passwort', autofocus:true
 								}
 							}
 							div(class:'form-group') {
