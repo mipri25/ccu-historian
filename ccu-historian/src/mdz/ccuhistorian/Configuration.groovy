@@ -22,6 +22,7 @@ import groovy.util.ConfigObject;
 import groovy.util.logging.Log
 import mdz.LogWriter
 import mdz.ccuhistorian.webapp.WebServerConfig
+import mdz.ccuhistorian.webapp.TextFormat
 import groovy.cli.commons.CliBuilder
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
@@ -54,7 +55,7 @@ class Configuration {
 			'finer, finest) before the configuration file is read')
 		cli.recalc('recalculates compressed data points and then shuts down')
 		cli.compact('compacts the database and then shuts down')
-		cli.clean(args:1, argName:'date', 'deletes all time series entries before the specified date (format is DD.MM.YYYY or YYYY-MM-DD) and then shuts down')
+		cli.clean(args:1, argName:'date', 'deletes all time series entries before the specified date (e.g. DD.MM.YYYY, YYYY-MM-DD or -xM for x months ago) and then shuts down')
 		cli.runscript(args:1, argName:'file', 'runs an SQL script from file and then shuts down')
 		cli.createscript(args:1, argName:'file', 'dumps the database to a file as SQL scipt and then shuts down')
 		
@@ -86,11 +87,14 @@ class Configuration {
 		if (options.runscript)
 			cmdLineConfig.runScriptFileName=options.runscript
 		if (options.clean) {
-			cmdLineConfig.clean=['yyyy-MM-dd', 'dd.MM.yyyy'].findResult {
-				try { Date.parse(it, options.clean)	} catch(Exception e) { null }
-			}
-			if (cmdLineConfig.clean==null)
+			def now=new Date()
+			cmdLineConfig.clean=TextFormat.parseDate(now, options.clean)
+			if (cmdLineConfig.clean==null) {
 				throw new Exception('Invalid command line option -clean')
+			}
+			if (cmdLineConfig.clean >= now) {
+				throw new Exception('Command line option -clean will delete entire database, aborting')
+			}
 		}
 	}
 

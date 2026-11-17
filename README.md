@@ -51,12 +51,12 @@ Für bestimmte Systeme existieren fertige Installationspakete:
 
 * CCU-Addon für folgende HomeMatic-Zentralen:
   * CCU3
-  * [RaspberryMatic](https://github.com/jens-maus/RaspberryMatic)
+  * [OpenCCU](https://openccu.de) (ehemals RaspberyyMatic)
 * Synology-Paket (DSM Version 6 und 7)
 * Docker-Image
   * [mdzio/ccu-historian](https://hub.docker.com/r/mdzio/ccu-historian)
 
-**Hinweis:** Für den Betrieb als Addon auf einer CCU3 oder RaspberryMatic muss an der Zentrale ein USB-Stick oder vorzugsweise eine USB-SSD angeschlossen sein!
+**Hinweis:** Für den Betrieb als Addon auf einer CCU3 oder [OpenCCU](https://openccu.de) muss an der Zentrale ein USB-Stick oder vorzugsweise eine USB-SSD angeschlossen sein!
 
 ## Installationspakete
 
@@ -80,14 +80,14 @@ Dieses Projekt steht unter der [GNU General Public License V3](LICENSE.txt) mit 
 
 Bei einer kommerziellen Verwendung des CCU-Historians muss also auf die Erweiterung H2-Highcharts verzichtet werden, oder eine entsprechende Lizenz erworben werden.
 
-Die Lizenzen von allen Abhängigkeiten sind im Ordner [dist-generic/src/third-party-licenses](https://github.com/mdzio/ccu-historian/tree/master/dist-generic/src/third-party-licenses) zu finden.
+Die Lizenzen von allen Abhängigkeiten sind im Ordner [dist-generic/src/third-party-licenses](https://github.com/mdzio/ccu-historian/tree/master/dist-generic/src/third-party-licenses) zu finden. Abgeleitete Werke dürfen nicht unter einer permissiveren Lizenz (z.B. MIT) veröffentlicht werden. Insbesondere darf der Quelltext nicht als Eingabe (z.B. Prompt, Trainingsdaten) für eine KI (z.B. LLM) verwendet werden, wenn die Ziellizenz nicht mit der GPLv3 kompatibel ist.
 
 ## Autoren
 
 Copyright (c) 2011-2025
 
 * [Mathias Dzionsko](https://github.com/mdzio) (Projektleiter, Hauptentwickler)
-* [Jens Maus](https://github.com/jens-maus) (CCU/RaspberryMatic-Distribution)
+* [Jens Maus](https://github.com/jens-maus) (CCU/OpenCCU-Distribution)
 * [hotroot](https://github.com/hotroot), Yannick Rocks, [Thomas Zahari](https://github.com/tzahari) (Synology-Distribution)
 * [D. Domig](https://github.com/jokay) (Docker Image)
 * [wak](https://github.com/wakr70) (Erweiterung H2-Highcharts)
